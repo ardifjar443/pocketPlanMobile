@@ -4,6 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "../screens/main/home/HomeScreen";
 import ProfilScreen from "../screens/main/ProfilScreen";
+import HomeKategori from "../screens/main/kategori/HomeKategori";
+import RekomendasiScreen from "../screens/main/RekomendasiScreen";
 import { enableScreens } from "react-native-screens";
 
 // Aktifkan optimisasi layar
@@ -35,6 +37,58 @@ const HomeStack = () => (
     }}
   >
     <Stack.Screen name="Home" component={HomeScreen} />
+  </Stack.Navigator>
+);
+
+const KategoriStack = () => (
+  <Stack.Navigator
+    screenOptions={{
+      animationEnabled: true, // Aktifkan animasi perpindahan
+      gestureEnabled: true, // Aktifkan gesture untuk swipe
+      headerShown: false,
+      cardStyleInterpolator: ({ current, layouts }) => {
+        return {
+          cardStyle: {
+            transform: [
+              {
+                translateX: current.progress.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [layouts.screen.width, 0], // Efek swipe
+                }),
+              },
+            ],
+          },
+        };
+      },
+    }}
+  >
+    <Stack.Screen name="Kategori" component={HomeKategori} />
+  </Stack.Navigator>
+);
+
+const RekomendasiStack = () => (
+  <Stack.Navigator
+    screenOptions={{
+      animationEnabled: true, // Aktifkan animasi perpindahan
+      gestureEnabled: true, // Aktifkan gesture untuk swipe
+      headerShown: false,
+      cardStyleInterpolator: ({ current, layouts }) => {
+        return {
+          cardStyle: {
+            transform: [
+              {
+                translateX: current.progress.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [layouts.screen.width, 0], // Efek swipe
+                }),
+              },
+            ],
+          },
+        };
+      },
+    }}
+  >
+    <Stack.Screen name="Rekomendasi" component={RekomendasiScreen} />
   </Stack.Navigator>
 );
 
@@ -78,12 +132,15 @@ const MainTab = () => {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: "#15B7B9",
+       
         tabBarInactiveTintColor: "gray",
         tabBarLabelStyle: { fontSize: 12 },
         headerShown: false,
       })}
     >
       <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Kategori" component={KategoriStack} />
+      <Tab.Screen name="Rekomendasi" component={RekomendasiStack} />
       <Tab.Screen name="Profil" component={ProfilStack} />
     </Tab.Navigator>
   );

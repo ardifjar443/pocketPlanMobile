@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import Pendapatan from "./Pendapatan";
-import Pengeluaran from "./Pengeluaran";
+import KategoriPendapatanScreen from "./KategoriPendapatanScreen";
+import KategoriPengeluaranScreen from "./KategoriPengeluaranScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { enableScreens } from "react-native-screens";
 
@@ -16,18 +16,12 @@ const Tab = createMaterialTopTabNavigator();
 const CustomHeader = ({ activeTab, onTabPress }) => (
   <View className="pt-12 bg-[#FFFFFE] ">
     <View className="p-2 flex flex-row items-center gap-2">
-      <Image
-        source={require("../../../../assets/profile.png")}
-        className=" w-12 h-12 rounded-full"
-      />
-      <Text className="text-3xl font-bold w-3/4">Hi, Gari!</Text>
-
-      
-    </View>   
+      <Text className="text-3xl font-bold w-3/4">Kategori</Text>
+    </View>
   </View>
 );
 
-const HomeScreen = ({ navigation }) => {
+const HomeKategori = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState("Pendapatan");
 
   const onTabPress = (tabName) => {
@@ -85,11 +79,11 @@ const HomeScreen = ({ navigation }) => {
           },
         })}
       >
-        <Tab.Screen name="Pendapatan" component={Pendapatan} />
-        <Tab.Screen name="Pengeluaran" component={Pengeluaran} />
+        <Tab.Screen name="Pendapatan" component={KategoriPendapatanScreen} />
+        <Tab.Screen name="Pengeluaran" component={KategoriPengeluaranScreen} />
       </Tab.Navigator>
     </View>
   );
 };
 
-export default HomeScreen;
+export default HomeKategori;
